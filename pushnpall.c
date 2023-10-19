@@ -47,6 +47,14 @@ int main(int argc, char **argv)
         {
             pall(stack);
         }
+	else if (strcmp(op, "pint") == 0)
+	{
+		pint(stack,line_number);
+	}
+	else if (strcmp(op, "pop") == 0)
+	{
+		pop(&stack);
+	}
     }
 
     free(input);
