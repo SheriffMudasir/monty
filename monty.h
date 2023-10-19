@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include <string.h>
 #define STACKSIZE 100
 
 typedef struct stack_s
@@ -13,7 +12,7 @@ typedef struct stack_s
         struct stack_s *prev;
 } stack_t;
 
-void push(int value, unsigned int line_number);
-void pall(void);
+void push(stack_t **stack, int value, unsigned int line_number);
+void pall(stack_t *stack);
 
 #endif
