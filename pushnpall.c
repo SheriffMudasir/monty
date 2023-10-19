@@ -1,19 +1,11 @@
 #include "monty.h"
-#include <stdio.h>
 
 int main(void)
 {
-<<<<<<< HEAD
-        char *op, *arg;
-        size_t len = 0;
-        unsigned int line_number = 0;
-	stack_t *stack = NULL;
-=======
     char *op, *arg;
     size_t len = 0;
     unsigned int line_number = 0;
     stack_t *stack = NULL;
->>>>>>> 446b534ba3229ed1d3c1bfea7dbd322372dd7d75
 
     while (1)
     {
