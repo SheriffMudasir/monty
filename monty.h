@@ -13,7 +13,7 @@ typedef struct stack_s
         struct stack_s *prev;
 } stack_t;
 
-void push(stack_t **stack, int value, unsigned int line_number);
+void push(stack_t **stack, int value);
 void pall(stack_t *stack);
 
 #endif

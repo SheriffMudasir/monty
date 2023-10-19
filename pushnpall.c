@@ -1,56 +1,60 @@
 #include "monty.h"
-int main(void)
+int main(int argc, char **argv)
 {
+    if (argc != 2)
+    {
+        fprintf(stderr, "USAGE: monty file\n");
+        exit(EXIT_FAILURE);
+    }
+
     char *op, *arg;
+    stack_t *stack = NULL;
+    FILE *file = fopen(argv[1], "r");
+    if (file == NULL)
+    {
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+
+    char *input = NULL;
     size_t len = 0;
     unsigned int line_number = 0;
-    stack_t *stack = NULL;
 
-    while (1)
+    while (getline(&input, &len, file) != -1)
     {
-        char *input = NULL;
-        ssize_t read = getline(&input, &len, stdin);
-        if (read == -1)
-            break;
-
         line_number++;
 
         op = strtok(input, " \t\n");
         arg = strtok(NULL, " \t\n");
 
-        if (op == NULL || (strcmp(op, "push") == 0 && arg == NULL))
-        {
-            fprintf(stderr, "L%u: usage: push integer\n", line_number);
-            free(input);
-            exit(EXIT_FAILURE);
-        }
+        if (op == NULL)
+            continue;
 
         if (strcmp(op, "push") == 0)
         {
-            int value;
-            if (isdigit(*arg) || (*arg == '-' && isdigit(*(arg + 1))))
-            {
-                value = atoi(arg);
-                push(&stack, value, line_number);
-            }
-            else
+            if (arg == NULL)
             {
                 fprintf(stderr, "L%u: usage: push integer\n", line_number);
                 free(input);
+                fclose(file);
                 exit(EXIT_FAILURE);
             }
+
+            int value = atoi(arg);
+            push(&stack, value);
         }
         else if (strcmp(op, "pall") == 0)
         {
             pall(stack);
         }
-        free(input);
     }
 
+    free(input);
+    fclose(file);
     return (0);
 }
 
-void push(stack_t **stack, int value, unsigned int line_number)
+void push(stack_t **stack, int value)
 {
     stack_t *new_node = malloc(sizeof(stack_t));
     if (new_node == NULL)
