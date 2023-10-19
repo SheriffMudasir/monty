@@ -55,6 +55,18 @@ int main(int argc, char **argv)
 	{
 		pop(&stack);
 	}
+    else if (strcmp(op, "swap") == 0)
+    {
+        swap(&stack);
+    }
+    else if (strcmp(op, "add") == 0)
+    {
+        add(&stack);
+    }
+    else if (strcmp(op, "nop") == 0)
+    {
+        nop(&stack);
+    }
     }
 
     free(input);
