@@ -12,8 +12,6 @@ typedef struct stack_s
         struct stack_s *prev;
 } stack_t;
 
-extern stack_t *stack;
-
 void push(int value, unsigned int line_number);
 void pall(void);
 

@@ -1,5 +1,4 @@
 #include "monty.h"
-
 int main(void)
 {
     char *op, *arg;
