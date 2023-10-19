@@ -1,10 +1,12 @@
 #include "monty.h"
+#include <stdio.h>
 
 int main(void)
 {
         char *op, *arg;
         size_t len = 0;
         unsigned int line_number = 0;
+	stack_t *stack = NULL;
 
         while (1)
         {
