@@ -21,7 +21,6 @@ int main(int argc, char **argv)
 	stack = NULL;
 	file = fopen(argv[1], "r");
 
-	// Check for file open error
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
