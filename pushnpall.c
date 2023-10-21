@@ -1,4 +1,12 @@
 #include "monty.h"
+#define STACKSIZE 100
+/**
+ * main - Entry point
+ * @argc: Argument count
+ * @argv: Argument vector
+ * REturn: 0 if successfull
+ */
+
 int main(int argc, char **argv)
 {
     if (argc != 2)
@@ -7,7 +15,8 @@ int main(int argc, char **argv)
         exit(EXIT_FAILURE);
     }
 
-    char *op, *arg;
+    char *op;
+    char *arg;
     stack_t *stack = NULL;
     FILE *file = fopen(argv[1], "r");
     if (file == NULL)
@@ -20,6 +29,7 @@ int main(int argc, char **argv)
     size_t len = 0;
     unsigned int line_number = 0;
 
+    #define _GNU_SOURCE
     while (getline(&input, &len, file) != -1)
     {
         line_number++;
@@ -45,28 +55,8 @@ int main(int argc, char **argv)
         }
         else if (strcmp(op, "pall") == 0)
         {
-            pall(stack);
+            pall(&stack, line_number);
         }
-	else if (strcmp(op, "pint") == 0)
-	{
-		pint(stack,line_number);
-	}
-	else if (strcmp(op, "pop") == 0)
-	{
-		pop(&stack);
-	}
-    else if (strcmp(op, "swap") == 0)
-    {
-        swap(&stack);
-    }
-    else if (strcmp(op, "add") == 0)
-    {
-        add(&stack);
-    }
-    else if (strcmp(op, "nop") == 0)
-    {
-        nop(&stack);
-    }
     }
 
     free(input);
@@ -84,17 +74,23 @@ void push(stack_t **stack, int value)
     }
 
     new_node->n = value;
-    new_node->prev = *stack;
+    new_node->prev = NULL;
+    new_node->next = *stack;
+
+    if (*stack)
+        (*stack)->prev = new_node;
+
     *stack = new_node;
 }
 
-void pall(stack_t *stack)
+void pall(stack_t **stack, unsigned int line_number)
 {
-    stack_t *current = stack;
+    stack_t *current = *stack;
 
     while (current != NULL)
     {
         printf("%d\n", current->n);
-        current = current->prev;
+        current = current->next;
     }
 }
+
