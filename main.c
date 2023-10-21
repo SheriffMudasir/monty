@@ -1,5 +1,7 @@
-
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
 #include "monty.h"
+
 
 /**
  * main - Entry point
@@ -17,6 +19,8 @@ int main(int argc, char **argv)
 	char *input;
 	size_t len;
 	unsigned int line_number;
+	int value;
+	(void)argc;
 
 	stack = NULL;
 	file = fopen(argv[1], "r");
@@ -50,12 +54,12 @@ int main(int argc, char **argv)
 				exit(EXIT_FAILURE);
 			}
 
-			int value = atoi(arg);
+		       	value= atoi(arg);
 			push(&stack, value);
 		}
 		else if (strcmp(op, "pall") == 0)
 		{
-			pall(&stack, line_number);
+			pall(&stack);
 		}
 	}
 
