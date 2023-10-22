@@ -21,7 +21,7 @@ void ex(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 {
 	char *op;
 	char *arg;
-	int value;
+	int i;
 
 	op = strtok(input, " \t\n");
 	arg = strtok(NULL, " \t\n");
@@ -29,7 +29,7 @@ void ex(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 	if (op == NULL)
 		return;
 
-	int i = 0;
+	i = 0;
 	while (op_funcs[i].opcode != NULL)
 	{
 		if (strcmp(op, op_funcs[i].opcode) == 0)

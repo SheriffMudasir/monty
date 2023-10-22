@@ -5,8 +5,7 @@
  * @stack: A pointer to the head of the stack.
  * @value: The value to push onto the stack.
  */
-
-void push(stack_t **stack, int value)
+void push(stack_t **stack, unsigned int value)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 
