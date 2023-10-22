@@ -6,9 +6,9 @@
  * @f: The function to execute for the opcode.
  */
 instruction_t op_funcs[] = {
-    {"push", push},
-    {"pall", pall},
-    {NULL, NULL}};
+	{"push", push},
+	{"pall", pall},
+	{NULL, NULL}};
 
 /**
  * ex - This function is the central execution for allocating functions
