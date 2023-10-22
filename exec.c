@@ -8,7 +8,9 @@
  */
 void execution(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 {
-        char *op, *arg;
+        char *op;
+       	char *arg;
+	int value;
 
         op = strtok(input, " \t\n");
         arg = strtok(NULL, " \t\n");
@@ -26,7 +28,7 @@ void execution(stack_t **stack, char *input, unsigned int line_number, FILE *fil
                         exit(EXIT_FAILURE);
                 }
 
-                int value = atoi(arg);
+                value = atoi(arg);
                 push(stack, value);
         }
         else if (strcmp(op, "pall") == 0)
