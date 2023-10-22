@@ -5,7 +5,7 @@
  * main - Entry point
  * @argc: Argument count
  * @argv: Argument vector
- * REturn: 0 if successfull
+ * Return: 0 if successfull
  */
 int main(int argc, char **argv)
 {
@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	(void)argc;
 
 	stack = NULL;
-	file = fopen(argv[1],"r");
+	file = fopen(argv[1], "r");
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
@@ -31,10 +31,10 @@ int main(int argc, char **argv)
 	while (getline(&input, &len, file) != -1)
 	{
 		line_number++;
-		execution(&stack, input, line_number, file);
+		ex(&stack, input, line_number, file);
 	}
 
 	free(input);
 	fclose(file);
-	return 0;
+	return (0);
 }
