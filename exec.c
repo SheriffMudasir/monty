@@ -1,10 +1,21 @@
 #include "monty.h"
+
+/**
+ * op_funcs - An array of opcode and function pointers.
+ * @op: The opcode string.
+ * @f: The function to execute for the opcode.
+ */
+instruction_t op_funcs[] = {
+    {"push", push},
+    {"pall", pall},
+    {NULL, NULL}};
+
 /**
  * ex - This function is the central execution for allocating functions
  * @stack: A pointer to the head of the stack.
- * @input: input read from file
- * @line_number: tracking line number
- * @file: the file passed a argument
+ * @input: Input read from the file.
+ * @line_number: Tracking line number.
+ * @file: The file passed as an argument.
  */
 void ex(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 {
@@ -18,21 +29,27 @@ void ex(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 	if (op == NULL)
 		return;
 
-	if (strcmp(op, "push") == 0)
+	int i = 0;
+	while (op_funcs[i].opcode != NULL)
 	{
-		if (arg == NULL)
+		if (strcmp(op, op_funcs[i].opcode) == 0)
 		{
-			fprintf(stderr, "L%u: usage: push integer\n", line_number);
-			free(input);
-			fclose(file);
-			exit(EXIT_FAILURE);
-		}
+			if (arg == NULL && strcmp(op, "push") == 0)
+			{
+				fprintf(stderr, "L%u: usage: push integer\n", line_number);
+				free(input);
+				fclose(file);
+				exit(EXIT_FAILURE);
+			}
 
-		value = atoi(arg);
-		push(stack, value);
+			op_funcs[i].f(stack, arg ? atoi(arg) : 0);
+			return;
+		}
+		i++;
 	}
-	else if (strcmp(op, "pall") == 0)
-	{
-		pall(stack);
-	}
+
+	fprintf(stderr, "L%u: unknown instruction %s\n", line_number, op);
+	free(input);
+	fclose(file);
+	exit(EXIT_FAILURE);
 }
