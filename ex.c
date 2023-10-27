@@ -1,37 +1,16 @@
 #include "monty.h"
 
-/**
- * op_funcs - An array of opcode and function pointers.
- * @op: The opcode string.
- * @f: The function to execute for the opcode.
- */
 instruction_t op_funcs[] = {
     {"push", push},
     {"pall", pall},
-    {"pint", pint},
-    {"pop", pop},
-    {"swap", swap},
-    {"add", add},
-    {"nop", nop},
-    {"sub", sub},
-    {"div", div},
-    {"mul", mul},
-    {"mod", mod},
     {NULL, NULL}};
 
-/**
- * ex - This function is the central execution for allocating functions
- * @stack: A pointer to the head of the stack.
- * @input: Input read from the file.
- * @line_number: Tracking line number.
- * @file: The file passed as an argument.
- */
 void ex(stack_t **stack, char *input, unsigned int line_number, FILE *file)
 {
+	int i;
 	char *op;
 	char *arg;
-	int i;
-
+	
 	op = strtok(input, " \t\n");
 	arg = strtok(NULL, " \t\n");
 

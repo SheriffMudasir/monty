@@ -1,23 +1,25 @@
 #define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
+#include <stdlib.h>
 #include "monty.h"
-/**
- * main - Entry point
- * @argc: Argument count
- * @argv: Argument vector
- * Return: 0 if successfull
- */
+
 int main(int argc, char **argv)
 {
-	stack_t *stack;
-	FILE *file;
 	char *input;
 	size_t len;
 	unsigned int line_number;
-	(void)argc;
+	stack_t *stack;
+	FILE *file;
+
+	if (argc != 2)
+	{
+		fprintf(stderr, "USAGE: monty file\n");
+		exit(EXIT_FAILURE);
+	}
 
 	stack = NULL;
 	file = fopen(argv[1], "r");
+
 	if (file == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
